@@ -18,12 +18,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -37,8 +37,8 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -160,6 +160,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas 1 (Crawling Data)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pipeline.html">Tugas 2 (Pipelines)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uts.html">UTS - Klasifikasi Abstrak PTA</a></li>
 </ul>
 
     </div>
@@ -426,22 +427,25 @@ document.write(`
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting snscrape
-  Downloading snscrape-0.6.0.20230303-py3-none-any.whl (71 kB)
-?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/71.6 KB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">71.6/71.6 KB</span> <span class=" -Color -Color-Red">4.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
-?25hRequirement already satisfied: lxml in /usr/local/lib/python3.9/dist-packages (from snscrape) (4.9.2)
-Requirement already satisfied: requests[socks] in /usr/local/lib/python3.9/dist-packages (from snscrape) (2.25.1)
-Requirement already satisfied: filelock in /usr/local/lib/python3.9/dist-packages (from snscrape) (3.9.0)
-Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.9/dist-packages (from snscrape) (4.6.3)
-Requirement already satisfied: idna&lt;3,&gt;=2.5 in /usr/local/lib/python3.9/dist-packages (from requests[socks]-&gt;snscrape) (2.10)
+  Downloading snscrape-0.6.2.20230320-py3-none-any.whl (71 kB)
+?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/71.8 KB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">71.8/71.8 KB</span> <span class=" -Color -Color-Red">3.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hRequirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.9/dist-packages (from snscrape) (4.11.2)
+Requirement already satisfied: lxml in /usr/local/lib/python3.9/dist-packages (from snscrape) (4.9.2)
+Requirement already satisfied: filelock in /usr/local/lib/python3.9/dist-packages (from snscrape) (3.10.7)
+Requirement already satisfied: requests[socks] in /usr/local/lib/python3.9/dist-packages (from snscrape) (2.27.1)
+Requirement already satisfied: soupsieve&gt;1.2 in /usr/local/lib/python3.9/dist-packages (from beautifulsoup4-&gt;snscrape) (2.4)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.9/dist-packages (from requests[socks]-&gt;snscrape) (2022.12.7)
-Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/local/lib/python3.9/dist-packages (from requests[socks]-&gt;snscrape) (1.26.14)
-Requirement already satisfied: chardet&lt;5,&gt;=3.0.2 in /usr/local/lib/python3.9/dist-packages (from requests[socks]-&gt;snscrape) (4.0.0)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.9/dist-packages (from requests[socks]-&gt;snscrape) (3.4)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/local/lib/python3.9/dist-packages (from requests[socks]-&gt;snscrape) (1.26.15)
+Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/local/lib/python3.9/dist-packages (from requests[socks]-&gt;snscrape) (2.0.12)
 Requirement already satisfied: PySocks!=1.5.7,&gt;=1.5.6 in /usr/local/lib/python3.9/dist-packages (from requests[socks]-&gt;snscrape) (1.7.1)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: snscrape
-Successfully installed snscrape-0.6.0.20230303
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed snscrape-0.6.2.20230320
 </pre></div>
 </div>
 </div>
@@ -459,22 +463,40 @@ Successfully installed snscrape-0.6.0.20230303
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/
-Requirement already satisfied: requests in /usr/local/lib/python3.9/dist-packages (2.25.1)
+Requirement already satisfied: requests in /usr/local/lib/python3.9/dist-packages (2.27.1)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.9/dist-packages (from requests) (3.4)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/local/lib/python3.9/dist-packages (from requests) (1.26.15)
+Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/local/lib/python3.9/dist-packages (from requests) (2.0.12)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.9/dist-packages (from requests) (2022.12.7)
-Requirement already satisfied: chardet&lt;5,&gt;=3.0.2 in /usr/local/lib/python3.9/dist-packages (from requests) (4.0.0)
-Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/local/lib/python3.9/dist-packages (from requests) (1.26.14)
-Requirement already satisfied: idna&lt;3,&gt;=2.5 in /usr/local/lib/python3.9/dist-packages (from requests) (2.10)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/
-Requirement already satisfied: html5lib in /usr/local/lib/python3.9/dist-packages (1.0.1)
+Requirement already satisfied: html5lib in /usr/local/lib/python3.9/dist-packages (1.1)
 Requirement already satisfied: webencodings in /usr/local/lib/python3.9/dist-packages (from html5lib) (0.5.1)
-Requirement already satisfied: six&gt;=1.9 in /usr/local/lib/python3.9/dist-packages (from html5lib) (1.15.0)
+Requirement already satisfied: six&gt;=1.9 in /usr/local/lib/python3.9/dist-packages (from html5lib) (1.16.0)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/
-Requirement already satisfied: bs4 in /usr/local/lib/python3.9/dist-packages (0.0.1)
-Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.9/dist-packages (from bs4) (4.6.3)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting bs4
+  Downloading bs4-0.0.1.tar.gz (1.1 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Preparing metadata (setup.py) ... ?25l?25hdone
+Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.9/dist-packages (from bs4) (4.11.2)
+Requirement already satisfied: soupsieve&gt;1.2 in /usr/local/lib/python3.9/dist-packages (from beautifulsoup4-&gt;bs4) (2.4)
+Building wheels for collected packages: bs4
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Building wheel for bs4 (setup.py) ... ?25l?25hdone
+  Created wheel for bs4: filename=bs4-0.0.1-py3-none-any.whl size=1270 sha256=5c84fd437f26d43815f0093bf13b23eb5f1f3e4828e1bd6d7bb2dcc89455182b
+  Stored in directory: /root/.cache/pip/wheels/73/2b/cb/099980278a0c9a3e57ff1a89875ec07bfa0b6fcbebb9a8cad3
+Successfully built bs4
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: bs4
+Successfully installed bs4-0.0.1
 </pre></div>
 </div>
 </div>
@@ -549,7 +571,7 @@ Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.9/dist-p
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">KeyboardInterrupt</span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="n">ef96f4d4f9f2</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="nn">&lt;ipython-input-6-ef96f4d4f9f2&gt;</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Using TwitterSearchScraper to scrape data and append tweets to list</span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">tweet</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sntwitter</span><span class="o">.</span><span class="n">TwitterSearchScraper</span><span class="p">(</span><span class="s1">&#39;Ganjar Pranowo Calon Presiden since:2022-01-01 until:2023-02-20&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_items</span><span class="p">()):</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="k">if</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">500</span><span class="p">:</span>
@@ -557,11 +579,11 @@ Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.9/dist-p
 <span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">tweets</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">tweet</span><span class="o">.</span><span class="n">date</span><span class="p">,</span> <span class="n">tweet</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">tweet</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">analize_sentiment</span><span class="p">(</span><span class="n">tweet</span><span class="o">.</span><span class="n">content</span><span class="p">),</span> <span class="n">tweet</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">location</span> <span class="p">])</span>
 
 <span class="nn">/usr/local/lib/python3.9/dist-packages/snscrape/modules/twitter.py</span> in <span class="ni">get_items</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1655</span>                 <span class="k">del</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;cursor&#39;</span><span class="p">]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1656</span> 
-<span class="ne">-&gt; </span><span class="mi">1657</span>                 <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iter_api_data</span><span class="p">(</span><span class="s1">&#39;https://api.twitter.com/2/search/adaptive.json&#39;</span><span class="p">,</span> <span class="n">_TwitterAPIType</span><span class="o">.</span><span class="n">V2</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">paginationParams</span><span class="p">,</span> <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1658</span>                         <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">_v2_timeline_instructions_to_tweets_or_users</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1659</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1659</span>                 <span class="k">del</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;cursor&#39;</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1660</span> 
+<span class="ne">-&gt; </span><span class="mi">1661</span>                 <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iter_api_data</span><span class="p">(</span><span class="s1">&#39;https://api.twitter.com/2/search/adaptive.json&#39;</span><span class="p">,</span> <span class="n">_TwitterAPIType</span><span class="o">.</span><span class="n">V2</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">paginationParams</span><span class="p">,</span> <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1662</span>                         <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">_v2_timeline_instructions_to_tweets_or_users</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1663</span> 
 
 <span class="nn">/usr/local/lib/python3.9/dist-packages/snscrape/modules/twitter.py</span> in <span class="ni">_iter_api_data</span><span class="nt">(self, endpoint, apiType, params, paginationParams, cursor, direction)</span>
 <span class="g g-Whitespace">    </span><span class="mi">759</span>                 <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
@@ -592,18 +614,18 @@ Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.9/dist-p
 <span class="g g-Whitespace">    </span><span class="mi">205</span>                                 <span class="k">if</span> <span class="n">attempt</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_retries</span><span class="p">:</span>
 
 <span class="nn">/usr/local/lib/python3.9/dist-packages/requests/sessions.py</span> in <span class="ni">send</span><span class="nt">(self, request, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">653</span> 
-<span class="g g-Whitespace">    </span><span class="mi">654</span>         <span class="c1"># Send the request</span>
-<span class="ne">--&gt; </span><span class="mi">655</span>         <span class="n">r</span> <span class="o">=</span> <span class="n">adapter</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">656</span> 
-<span class="g g-Whitespace">    </span><span class="mi">657</span>         <span class="c1"># Total elapsed time of the request (approximately)</span>
+<span class="g g-Whitespace">    </span><span class="mi">643</span> 
+<span class="g g-Whitespace">    </span><span class="mi">644</span>         <span class="c1"># Send the request</span>
+<span class="ne">--&gt; </span><span class="mi">645</span>         <span class="n">r</span> <span class="o">=</span> <span class="n">adapter</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">646</span> 
+<span class="g g-Whitespace">    </span><span class="mi">647</span>         <span class="c1"># Total elapsed time of the request (approximately)</span>
 
 <span class="nn">/usr/local/lib/python3.9/dist-packages/requests/adapters.py</span> in <span class="ni">send</span><span class="nt">(self, request, stream, timeout, verify, cert, proxies)</span>
-<span class="g g-Whitespace">    </span><span class="mi">437</span>         <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">438</span>             <span class="k">if</span> <span class="ow">not</span> <span class="n">chunked</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">439</span>                 <span class="n">resp</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">440</span>                     <span class="n">method</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">441</span>                     <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">438</span>         <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">439</span>             <span class="k">if</span> <span class="ow">not</span> <span class="n">chunked</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">440</span>                 <span class="n">resp</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">441</span>                     <span class="n">method</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">442</span>                     <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
 
 <span class="nn">/usr/local/lib/python3.9/dist-packages/urllib3/connectionpool.py</span> in <span class="ni">urlopen</span><span class="nt">(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, **response_kw)</span>
 <span class="g g-Whitespace">    </span><span class="mi">701</span> 
@@ -690,7 +712,7 @@ Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.9/dist-p
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-c8497ce3-bc91-4e6f-a854-fce5ae465e13">
+  <div id="df-b3d4f45e-e15c-42fc-ae55-e707d61d0ed8">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -728,33 +750,33 @@ Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.9/dist-p
     </tr>
     <tr>
       <th>1</th>
-      <td>2023-02-18 09:38:55+00:00</td>
-      <td>2045Tv</td>
-      <td>Semakin jelas tanda-tanda Megawati memilih Gan...</td>
+      <td>2023-02-19 11:08:25+00:00</td>
+      <td>__RismaWidiono_</td>
+      <td>Sekitar 10 ribu petani di Temanggung, Jawa Ten...</td>
+      <td>Netral</td>
+      <td>DKI Jakarta, Indonesia</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2023-02-19 03:11:00+00:00</td>
+      <td>nurmalianindi</td>
+      <td>Calon Presiden 2024 nih bos #ganjarpranowo #ga...</td>
+      <td>Netral</td>
+      <td>Bengkulu, Indonesia</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2023-02-18 11:01:08+00:00</td>
+      <td>evalita26</td>
+      <td>@AirinDatangLagi @ganjarpranowo Yang waras ten...</td>
       <td>Netral</td>
       <td></td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>2023-02-17 13:59:33+00:00</td>
-      <td>terkinidotid</td>
-      <td>Jokowi Mania Soal Ide Duet Prabowo dan Ganjar:...</td>
-      <td>Netral</td>
-      <td>Makassar, Indonesia</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2023-02-17 12:30:41+00:00</td>
-      <td>RonaldiesYafet</td>
-      <td>Ketika mantan relawan Jokowi, ubah haluan mend...</td>
-      <td>Netral</td>
-      <td>Indonesia</td>
-    </tr>
-    <tr>
       <th>4</th>
-      <td>2023-02-17 09:50:04+00:00</td>
-      <td>amarillo_solido</td>
-      <td>Koalisi Indonesia Bersatu (KIB) memunculkan na...</td>
+      <td>2023-02-18 11:00:10+00:00</td>
+      <td>SasliRahadi1</td>
+      <td>@ganjarpranowo Calon presiden tapi presiden yo...</td>
       <td>Netral</td>
       <td></td>
     </tr>
@@ -768,41 +790,41 @@ Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.9/dist-p
     </tr>
     <tr>
       <th>496</th>
-      <td>2022-12-25 15:26:39+00:00</td>
-      <td>sutrvey</td>
-      <td>Pendiri lembaga survei Cyrus Network, Hasan Na...</td>
+      <td>2023-01-12 08:01:43+00:00</td>
+      <td>gracia_tejo</td>
+      <td>@GanjaranApp @PDI_Perjuangan @ganjarpranowo ma...</td>
       <td>Netral</td>
-      <td></td>
+      <td>Blora, Indonesia</td>
     </tr>
     <tr>
       <th>497</th>
-      <td>2022-12-25 14:18:20+00:00</td>
-      <td>Ciripaa_</td>
-      <td>Pendiri lembaga survei Cyrus Network, Hasan Na...</td>
+      <td>2023-01-12 07:22:30+00:00</td>
+      <td>GanjaranApp</td>
+      <td>HUT @PDI_Perjuangan ke 50 tahun itu merupakan ...</td>
       <td>Netral</td>
       <td></td>
     </tr>
     <tr>
       <th>498</th>
-      <td>2022-12-25 14:11:25+00:00</td>
-      <td>KeceJomblo</td>
-      <td>Pendiri lembaga survei Cyrus Network, Hasan Na...</td>
+      <td>2023-01-12 06:47:01+00:00</td>
+      <td>Urrangawak</td>
+      <td>Sama kita Pak Guntur Soekarnoputra untuk calon...</td>
       <td>Netral</td>
-      <td></td>
+      <td>🇮🇩 Pancasila</td>
     </tr>
     <tr>
       <th>499</th>
-      <td>2022-12-25 12:52:05+00:00</td>
-      <td>Laskarorangbaik</td>
-      <td>Ganjar Calon Presiden 2024 #ganjarpranowo #gan...</td>
+      <td>2023-01-12 05:38:53+00:00</td>
+      <td>IDSahabatGanjar</td>
+      <td>Dalam setiap kali survei soal calon presiden y...</td>
       <td>Netral</td>
-      <td>papua barat</td>
+      <td>Indonesia</td>
     </tr>
     <tr>
       <th>500</th>
-      <td>2022-12-25 08:53:21+00:00</td>
-      <td>HerlinDude</td>
-      <td>Pendiri lembaga survei Cyrus Network, Hasan Na...</td>
+      <td>2023-01-12 05:07:05+00:00</td>
+      <td>AlineShut</td>
+      <td>Ganjar Calon Presiden 2024 #ganjarpranowo #gan...</td>
       <td>Netral</td>
       <td></td>
     </tr>
@@ -810,7 +832,7 @@ Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.9/dist-p
 </table>
 <p>501 rows × 5 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-c8497ce3-bc91-4e6f-a854-fce5ae465e13')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-b3d4f45e-e15c-42fc-ae55-e707d61d0ed8')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
         
@@ -861,12 +883,12 @@ Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.9/dist-p
 
       <script>
         const buttonEl =
-          document.querySelector('#df-c8497ce3-bc91-4e6f-a854-fce5ae465e13 button.colab-df-convert');
+          document.querySelector('#df-b3d4f45e-e15c-42fc-ae55-e707d61d0ed8 button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-c8497ce3-bc91-4e6f-a854-fce5ae465e13');
+          const element = document.querySelector('#df-b3d4f45e-e15c-42fc-ae55-e707d61d0ed8');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -929,191 +951,119 @@ Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.9/dist-p
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-  <div id="df-1fcde9a9-1788-466f-beec-eed8a8f0e64c">
-    <div class="colab-df-container">
-      <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-10-7930a43a3929&gt;</span> in <span class="ni">&lt;cell line: 6&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="c1"># links = it.findAll(&#39;div&#39;, {&#39;style&#39;:&#39;margin: 25px 0px 15px 0px;&#39;})</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="n">link</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;gray button&#39;</span><span class="p">)[</span><span class="s1">&#39;href&#39;</span><span class="p">]</span>
+<span class="ne">---&gt; </span><span class="mi">16</span>     <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">soup2</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">abstraks</span> <span class="o">=</span> <span class="n">soup2</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;style&#39;</span><span class="p">:</span><span class="s1">&#39;margin: 15px 15px 15px 15px;&#39;</span><span class="p">})</span>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+<span class="nn">/usr/local/lib/python3.9/dist-packages/requests/api.py</span> in <span class="ni">get</span><span class="nt">(url, params, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span>     <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span><span class="s2"> </span>
+<span class="ne">---&gt; </span><span class="mi">75</span><span class="s2">     return request(&#39;get&#39;, url, params=params, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">76</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">77</span><span class="s2"> </span>
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Judul</th>
-      <th>NIM</th>
-      <th>Penulis</th>
-      <th>Abstrak</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>IMPLEMENTASI  METODE N-GRAM PADA PEMBUATAN GAM...</td>
-      <td>080411100078</td>
-      <td>Farizal Arifin</td>
-      <td>Teknologi mobile  game  berkembang  dengan  sa...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>IMPLEMENTASI PERFORMANCE PRISM \r\nUNTUK SISTE...</td>
-      <td>070411100081</td>
-      <td>Luhur Priyantoko Aji</td>
-      <td>Pengukuran kinerja adalah proses di mana organ...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>PENGEMBANGAN VIRTUAL CLASS UNTUK PEMBELAJARAN ...</td>
-      <td>070411100042</td>
-      <td>Dwi Adi Permana</td>
-      <td>Internet berkembang dengan cepat beberapa tahu...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>ANALISIS DAN PENERAPAN ALGORITMA PARTICLE SWAR...</td>
-      <td>070411100129</td>
-      <td>Qomarul Haryadi Irfan Rifa'i</td>
-      <td>Penjadwalan mata kuliah di program studi Tekni...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Rancang Bangun Sistem Pendukung Keputusan Pene...</td>
-      <td>080411100003</td>
-      <td>Ayu Winda Istara</td>
-      <td>Seiring dengan perubahan dalam paradigma pemba...</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>250</th>
-      <td>Pemetaan SMA/SMK/MA Di Kabupaten Lamongan Berd...</td>
-      <td>100411100054</td>
-      <td>Durorin Khumairoh</td>
-      <td>Sarana dan prasarana yang memadai, jumlah lulu...</td>
-    </tr>
-    <tr>
-      <th>251</th>
-      <td>REKOMENDASI PEMINJAMAN BUKU BERDASARKAN MINAT ...</td>
-      <td>100411100051</td>
-      <td>NAILY NAJIHAH</td>
-      <td>Banyaknya keragaman buku di perpustakaan, meny...</td>
-    </tr>
-    <tr>
-      <th>252</th>
-      <td>âVirtual Environment(VE) Kampus menggunakan ...</td>
-      <td>100411100026</td>
-      <td>Yusuf Machsar</td>
-      <td>Kampus merupakan lingkungan pendidikan perguru...</td>
-    </tr>
-    <tr>
-      <th>253</th>
-      <td>SISTEM PENDUKUNG KEPUTUSAN PENENTUAN PEMINATAN...</td>
-      <td>100411100079</td>
-      <td>Atin Hasanah</td>
-      <td>ABSTRAK \r\n\r\nTahun Ajaran 2013/2014 akan di...</td>
-    </tr>
-    <tr>
-      <th>254</th>
-      <td>Pemanfaatan Metode Cluster SOM â IDB sebagai...</td>
-      <td>100411100031</td>
-      <td>Lilia Rahmawati</td>
-      <td>Kebijakan pemerintah di bidang pendidikan meny...</td>
-    </tr>
-  </tbody>
-</table>
-<p>255 rows × 4 columns</p>
+<span class="nn">/usr/local/lib/python3.9/dist-packages/requests/api.py</span> in <span class="ni">request</span><span class="nt">(method, url, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span><span class="s2">     # cases, and look like a memory leak in others.</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span><span class="s2">     with sessions.Session() as session:</span>
+<span class="ne">---&gt; </span><span class="mi">61</span><span class="s2">         return session.request(method=method, url=url, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">63</span><span class="s2"> </span>
+
+<span class="nn">/usr/local/lib/python3.9/dist-packages/requests/sessions.py</span> in <span class="ni">request</span><span class="nt">(self, method, url, params, data, headers, cookies, files, auth, timeout, allow_redirects, proxies, hooks, stream, verify, cert, json)</span>
+<span class="g g-Whitespace">    </span><span class="mi">527</span><span class="s2">         }</span>
+<span class="g g-Whitespace">    </span><span class="mi">528</span><span class="s2">         send_kwargs.update(settings)</span>
+<span class="ne">--&gt; </span><span class="mi">529</span><span class="s2">         resp = self.send(prep, **send_kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">530</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">531</span><span class="s2">         return resp</span>
+
+<span class="nn">/usr/local/lib/python3.9/dist-packages/requests/sessions.py</span> in <span class="ni">send</span><span class="nt">(self, request, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">643</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">644</span><span class="s2">         # Send the request</span>
+<span class="ne">--&gt; </span><span class="mi">645</span><span class="s2">         r = adapter.send(request, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">646</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">647</span><span class="s2">         # Total elapsed time of the request (approximately)</span>
+
+<span class="nn">/usr/local/lib/python3.9/dist-packages/requests/adapters.py</span> in <span class="ni">send</span><span class="nt">(self, request, stream, timeout, verify, cert, proxies)</span>
+<span class="g g-Whitespace">    </span><span class="mi">438</span><span class="s2">         try:</span>
+<span class="g g-Whitespace">    </span><span class="mi">439</span><span class="s2">             if not chunked:</span>
+<span class="ne">--&gt; </span><span class="mi">440</span><span class="s2">                 resp = conn.urlopen(</span>
+<span class="g g-Whitespace">    </span><span class="mi">441</span><span class="s2">                     method=request.method,</span>
+<span class="g g-Whitespace">    </span><span class="mi">442</span><span class="s2">                     url=url,</span>
+
+<span class="nn">/usr/local/lib/python3.9/dist-packages/urllib3/connectionpool.py</span> in <span class="ni">urlopen</span><span class="nt">(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, **response_kw)</span>
+<span class="g g-Whitespace">    </span><span class="mi">701</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">702</span><span class="s2">             # Make the request on the httplib connection object.</span>
+<span class="ne">--&gt; </span><span class="mi">703</span><span class="s2">             httplib_response = self._make_request(</span>
+<span class="g g-Whitespace">    </span><span class="mi">704</span><span class="s2">                 conn,</span>
+<span class="g g-Whitespace">    </span><span class="mi">705</span><span class="s2">                 method,</span>
+
+<span class="nn">/usr/local/lib/python3.9/dist-packages/urllib3/connectionpool.py</span> in <span class="ni">_make_request</span><span class="nt">(self, conn, method, url, timeout, chunked, **httplib_request_kw)</span>
+<span class="g g-Whitespace">    </span><span class="mi">447</span><span class="s2">                     # Python 3 (including for exceptions like SystemExit).</span>
+<span class="g g-Whitespace">    </span><span class="mi">448</span><span class="s2">                     # Otherwise it looks like a bug in the code.</span>
+<span class="ne">--&gt; </span><span class="mi">449</span><span class="s2">                     six.raise_from(e, None)</span>
+<span class="g g-Whitespace">    </span><span class="mi">450</span><span class="s2">         except (SocketTimeout, BaseSSLError, SocketError) as e:</span>
+<span class="g g-Whitespace">    </span><span class="mi">451</span><span class="s2">             self._raise_timeout(err=e, url=url, timeout_value=read_timeout)</span>
+
+<span class="nn">/usr/local/lib/python3.9/dist-packages/urllib3/packages/six.py</span> in <span class="ni">raise_from</span><span class="nt">(value, from_value)</span>
+
+<span class="nn">/usr/local/lib/python3.9/dist-packages/urllib3/connectionpool.py</span> in <span class="ni">_make_request</span><span class="nt">(self, conn, method, url, timeout, chunked, **httplib_request_kw)</span>
+<span class="g g-Whitespace">    </span><span class="mi">442</span><span class="s2">                 # Python 3</span>
+<span class="g g-Whitespace">    </span><span class="mi">443</span><span class="s2">                 try:</span>
+<span class="ne">--&gt; </span><span class="mi">444</span><span class="s2">                     httplib_response = conn.getresponse()</span>
+<span class="g g-Whitespace">    </span><span class="mi">445</span><span class="s2">                 except BaseException as e:</span>
+<span class="g g-Whitespace">    </span><span class="mi">446</span><span class="s2">                     # Remove the TypeError from the exception chain in</span>
+
+<span class="nn">/usr/lib/python3.9/http/client.py</span> in <span class="ni">getresponse</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1375</span><span class="s2">         try:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1376</span><span class="s2">             try:</span>
+<span class="ne">-&gt; </span><span class="mi">1377</span><span class="s2">                 response.begin()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1378</span><span class="s2">             except ConnectionError:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1379</span><span class="s2">                 self.close()</span>
+
+<span class="nn">/usr/lib/python3.9/http/client.py</span> in <span class="ni">begin</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">318</span><span class="s2">         # read until we get a non-100 response</span>
+<span class="g g-Whitespace">    </span><span class="mi">319</span><span class="s2">         while True:</span>
+<span class="ne">--&gt; </span><span class="mi">320</span><span class="s2">             version, status, reason = self._read_status()</span>
+<span class="g g-Whitespace">    </span><span class="mi">321</span><span class="s2">             if status != CONTINUE:</span>
+<span class="g g-Whitespace">    </span><span class="mi">322</span><span class="s2">                 break</span>
+
+<span class="nn">/usr/lib/python3.9/http/client.py</span> in <span class="ni">_read_status</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">279</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">280</span><span class="s2">     def _read_status(self):</span>
+<span class="ne">--&gt; </span><span class="mi">281</span><span class="s2">         line = str(self.fp.readline(_MAXLINE + 1), &quot;iso-8859-1&quot;)</span>
+<span class="g g-Whitespace">    </span><span class="mi">282</span><span class="s2">         if len(line) &gt; _MAXLINE:</span>
+<span class="g g-Whitespace">    </span><span class="mi">283</span><span class="s2">             raise LineTooLong(&quot;status line&quot;)</span>
+
+<span class="nn">/usr/lib/python3.9/socket.py</span> in <span class="ni">readinto</span><span class="nt">(self, b)</span>
+<span class="g g-Whitespace">    </span><span class="mi">702</span><span class="s2">         while True:</span>
+<span class="g g-Whitespace">    </span><span class="mi">703</span><span class="s2">             try:</span>
+<span class="ne">--&gt; </span><span class="mi">704</span><span class="s2">                 return self._sock.recv_into(b)</span>
+<span class="g g-Whitespace">    </span><span class="mi">705</span><span class="s2">             except timeout:</span>
+<span class="g g-Whitespace">    </span><span class="mi">706</span><span class="s2">                 self._timeout_occurred = True</span>
+
+<span class="nn">/usr/lib/python3.9/ssl.py</span> in <span class="ni">recv_into</span><span class="nt">(self, buffer, nbytes, flags)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1240</span><span class="s2">                   &quot;non-zero flags not allowed in calls to recv_into() on </span><span class="si">%s</span><span class="s2">&quot; %</span>
+<span class="g g-Whitespace">   </span><span class="mi">1241</span><span class="s2">                   self.__class__)</span>
+<span class="ne">-&gt; </span><span class="mi">1242</span><span class="s2">             return self.read(nbytes, buffer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1243</span><span class="s2">         else:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1244</span><span class="s2">             return super().recv_into(buffer, nbytes, flags)</span>
+
+<span class="nn">/usr/lib/python3.9/ssl.py</span> in <span class="ni">read</span><span class="nt">(self, len, buffer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1098</span><span class="s2">         try:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1099</span><span class="s2">             if buffer is not None:</span>
+<span class="ne">-&gt; </span><span class="mi">1100</span><span class="s2">                 return self._sslobj.read(len, buffer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1101</span><span class="s2">             else:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1102</span><span class="s2">                 return self._sslobj.read(len)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-1fcde9a9-1788-466f-beec-eed8a8f0e64c')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
-        
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M0 0h24v24H0V0z" fill="none"/>
-    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
-  </svg>
-      </button>
-      
-  <style>
-    .colab-df-container {
-      display:flex;
-      flex-wrap:wrap;
-      gap: 12px;
-    }
-
-    .colab-df-convert {
-      background-color: #E8F0FE;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: none;
-      fill: #1967D2;
-      height: 32px;
-      padding: 0 0 0 0;
-      width: 32px;
-    }
-
-    .colab-df-convert:hover {
-      background-color: #E2EBFA;
-      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-      fill: #174EA6;
-    }
-
-    [theme=dark] .colab-df-convert {
-      background-color: #3B4455;
-      fill: #D2E3FC;
-    }
-
-    [theme=dark] .colab-df-convert:hover {
-      background-color: #434B5C;
-      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-      fill: #FFFFFF;
-    }
-  </style>
-
-      <script>
-        const buttonEl =
-          document.querySelector('#df-1fcde9a9-1788-466f-beec-eed8a8f0e64c button.colab-df-convert');
-        buttonEl.style.display =
-          google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-        async function convertToInteractive(key) {
-          const element = document.querySelector('#df-1fcde9a9-1788-466f-beec-eed8a8f0e64c');
-          const dataTable =
-            await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                     [key], {});
-          if (!dataTable) return;
-
-          const docLinkHtml = 'Like what you see? Visit the ' +
-            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-            + ' to learn more about interactive tables.';
-          element.innerHTML = '';
-          dataTable['output_type'] = 'display_data';
-          await google.colab.output.renderOutput(dataTable, element);
-          const docLink = document.createElement('div');
-          docLink.innerHTML = docLinkHtml;
-          element.appendChild(docLink);
-        }
-      </script>
-    </div>
-  </div>
-  </div></div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1154,168 +1104,6 @@ Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.9/dist-p
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-  <div id="df-d55d8371-e00f-4e9f-90bd-650475d5a232">
-    <div class="colab-df-container">
-      <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Judul</th>
-      <th>Isi Berita</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Keistimewaan 5 Masjid Terapung di Indonesia, S...</td>
-      <td>Jakarta - Kota Pariaman tahun ini akan memili...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>6 Orang Tewas Akibat Gempa Susulan di Turki sa...</td>
-      <td>Jakarta - Enam orang tewas dalam gempa susula...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Begini Cara Memperoleh Izin Memiliki Senjata Api</td>
-      <td>Jakarta - Senjata api selama ini identik deng...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Momen Dramatis Evakuasi Udara Rombongan Kapold...</td>
-      <td>Jakarta - Momen evakuasi rombongan Kapolda Ja...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Liverpool vs Real Madrid di Liga Champions Sel...</td>
-      <td>Jakarta - Pertandingan Liverpool vs Real Madr...</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>300</th>
-      <td>Kejagung Banding atas Putusan Majelis Hakim PN...</td>
-      <td>Jakarta - Kejaksaan Agung Republik Indonesia ...</td>
-    </tr>
-    <tr>
-      <th>301</th>
-      <td>Duel Liverpool vs Real Madrid di Liga Champion...</td>
-      <td>Jakarta - Duel Liverpool vs Real Madrid bakal...</td>
-    </tr>
-    <tr>
-      <th>302</th>
-      <td>Pengamat Menilai Perluasan Kodam di Tiap Provi...</td>
-      <td>Jakarta -Rencana perluasan Komando Daerah Mil...</td>
-    </tr>
-    <tr>
-      <th>303</th>
-      <td>Saat Para Pesohor dan Fashionista Berkumpul Me...</td>
-      <td>Jakarta - Para selebriti dan fashionista berk...</td>
-    </tr>
-    <tr>
-      <th>304</th>
-      <td>Cerita Brand Kami. Tampil di New York Fashion ...</td>
-      <td>Jakarta - Tampil di New York Fashion Week (NY...</td>
-    </tr>
-  </tbody>
-</table>
-<p>305 rows × 2 columns</p>
-</div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-d55d8371-e00f-4e9f-90bd-650475d5a232')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
-        
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M0 0h24v24H0V0z" fill="none"/>
-    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
-  </svg>
-      </button>
-      
-  <style>
-    .colab-df-container {
-      display:flex;
-      flex-wrap:wrap;
-      gap: 12px;
-    }
-
-    .colab-df-convert {
-      background-color: #E8F0FE;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: none;
-      fill: #1967D2;
-      height: 32px;
-      padding: 0 0 0 0;
-      width: 32px;
-    }
-
-    .colab-df-convert:hover {
-      background-color: #E2EBFA;
-      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
-      fill: #174EA6;
-    }
-
-    [theme=dark] .colab-df-convert {
-      background-color: #3B4455;
-      fill: #D2E3FC;
-    }
-
-    [theme=dark] .colab-df-convert:hover {
-      background-color: #434B5C;
-      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
-      fill: #FFFFFF;
-    }
-  </style>
-
-      <script>
-        const buttonEl =
-          document.querySelector('#df-d55d8371-e00f-4e9f-90bd-650475d5a232 button.colab-df-convert');
-        buttonEl.style.display =
-          google.colab.kernel.accessAllowed ? 'block' : 'none';
-
-        async function convertToInteractive(key) {
-          const element = document.querySelector('#df-d55d8371-e00f-4e9f-90bd-650475d5a232');
-          const dataTable =
-            await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                     [key], {});
-          if (!dataTable) return;
-
-          const docLinkHtml = 'Like what you see? Visit the ' +
-            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-            + ' to learn more about interactive tables.';
-          element.innerHTML = '';
-          dataTable['output_type'] = 'display_data';
-          await google.colab.output.renderOutput(dataTable, element);
-          const docLink = document.createElement('div');
-          docLink.innerHTML = docLinkHtml;
-          element.appendChild(docLink);
-        }
-      </script>
-    </div>
-  </div>
-  </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1353,7 +1141,10 @@ Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.9/dist-p
               
               
                 <footer class="bd-footer-article">
-                  <!-- Previous / next buttons -->
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="notebooks.html"
@@ -1373,7 +1164,10 @@ Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.9/dist-p
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
+</div></div>
+  
 </div>
+
                 </footer>
               
             </div>
@@ -1405,7 +1199,7 @@ Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.9/dist-p
             
           </div>
           <footer class="bd-footer-content">
-            <div class="bd-footer-content__inner">
+            
 <div class="bd-footer-content__inner container">
   
   <div class="footer-item">
@@ -1435,7 +1229,7 @@ By Andrian Dwi Baitur Rizky
     
   </div>
   
-</div></div>
+</div>
           </footer>
         
 
@@ -1444,8 +1238,8 @@ By Andrian Dwi Baitur Rizky
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
   <footer class="bd-footer">
   </footer>
