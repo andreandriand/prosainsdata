@@ -4,9 +4,7 @@ Disini memuat dokumentasi perkuliahan mata kuliah Proyek Sains Data 2023, Prodi 
 
 Oleh:
 
-Andrian Dwi Baitur Rizky
-
-200411100210
+Andrian Dwi Baitur Rizky (200411100210)
 
 ```{tableofcontents}
 ```
