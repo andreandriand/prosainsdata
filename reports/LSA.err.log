@@ -30,7 +30,11 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-from google.colab import drive
-drive.mount('/content/drive')
+auth.authenticate_user()
+gauth = GoogleAuth()
+gauth.credentials = GoogleCredentials.get_application_default()
+drive = GoogleDrive(gauth)
+your_module = drive.CreateFile({"id": "13sFuLQ9LNUz_BCIJTnyKMzY8n-FPCIgn"})
+your_module.GetContentFile("credential.py") 
 -------------------
 
