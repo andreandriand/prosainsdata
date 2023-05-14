@@ -403,8 +403,16 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-dataset-youtube-dan-twitter-yang-telah-melalui-prepocessing">Load Dataset Youtube dan Twitter yang telah Melalui Prepocessing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-mengubah-teks-menjadi-fitur">TF-IDF (Mengubah Teks Menjadi Fitur)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#singular-value-decomposition">Singular Value Decomposition</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-svd-untuk-data-twitter">Perform SVD Untuk Data Twitter</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-svd-untuk-data-youtube">Perform SVD Untuk Data Youtube</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-svd-untuk-data-twitter">Perform SVD Untuk Data Twitter</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#bobot-kata-terhadap-masing-masing-topik">Bobot Kata Terhadap Masing - Masing Topik</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#bobot-setiap-topik-terhadap-dokumen">Bobot Setiap Topik Terhadap Dokumen</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-svd-untuk-data-youtube">Perform SVD Untuk Data Youtube</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Bobot Kata Terhadap Masing - Masing Topik</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Bobot Setiap Topik Terhadap Dokumen</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -445,53 +453,48 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/
 Requirement already satisfied: nltk in /usr/local/lib/python3.10/dist-packages (3.8.1)
-Requirement already satisfied: regex&gt;=2021.8.3 in /usr/local/lib/python3.10/dist-packages (from nltk) (2022.10.31)
-Requirement already satisfied: joblib in /usr/local/lib/python3.10/dist-packages (from nltk) (1.2.0)
-Requirement already satisfied: tqdm in /usr/local/lib/python3.10/dist-packages (from nltk) (4.65.0)
 Requirement already satisfied: click in /usr/local/lib/python3.10/dist-packages (from nltk) (8.1.3)
+Requirement already satisfied: joblib in /usr/local/lib/python3.10/dist-packages (from nltk) (1.2.0)
+Requirement already satisfied: regex&gt;=2021.8.3 in /usr/local/lib/python3.10/dist-packages (from nltk) (2022.10.31)
+Requirement already satisfied: tqdm in /usr/local/lib/python3.10/dist-packages (from nltk) (4.65.0)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting indoNLP
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading indoNLP-0.3.4-py3-none-any.whl (121 kB)
+  Downloading indoNLP-0.3.4-py3-none-any.whl (121 kB)
 ?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/121.9 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">92.2/121.9 kB</span> <span class=" -Color -Color-Red">2.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">121.9/121.9 kB</span> <span class=" -Color -Color-Red">2.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">121.9/121.9 kB</span> <span class=" -Color -Color-Red">7.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: indoNLP
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed indoNLP-0.3.4
+Successfully installed indoNLP-0.3.4
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/
 Requirement already satisfied: pydrive in /usr/local/lib/python3.10/dist-packages (1.3.1)
-Requirement already satisfied: PyYAML&gt;=3.0 in /usr/local/lib/python3.10/dist-packages (from pydrive) (6.0)
 Requirement already satisfied: google-api-python-client&gt;=1.2 in /usr/local/lib/python3.10/dist-packages (from pydrive) (2.84.0)
 Requirement already satisfied: oauth2client&gt;=4.0.0 in /usr/local/lib/python3.10/dist-packages (from pydrive) (4.1.3)
-Requirement already satisfied: google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,&lt;3.0.0dev,&gt;=1.31.5 in /usr/local/lib/python3.10/dist-packages (from google-api-python-client&gt;=1.2-&gt;pydrive) (2.11.0)
-Requirement already satisfied: google-auth&lt;3.0.0dev,&gt;=1.19.0 in /usr/local/lib/python3.10/dist-packages (from google-api-python-client&gt;=1.2-&gt;pydrive) (2.17.3)
-Requirement already satisfied: uritemplate&lt;5,&gt;=3.0.1 in /usr/local/lib/python3.10/dist-packages (from google-api-python-client&gt;=1.2-&gt;pydrive) (4.1.1)
+Requirement already satisfied: PyYAML&gt;=3.0 in /usr/local/lib/python3.10/dist-packages (from pydrive) (6.0)
 Requirement already satisfied: httplib2&lt;1dev,&gt;=0.15.0 in /usr/local/lib/python3.10/dist-packages (from google-api-python-client&gt;=1.2-&gt;pydrive) (0.21.0)
+Requirement already satisfied: google-auth&lt;3.0.0dev,&gt;=1.19.0 in /usr/local/lib/python3.10/dist-packages (from google-api-python-client&gt;=1.2-&gt;pydrive) (2.17.3)
 Requirement already satisfied: google-auth-httplib2&gt;=0.1.0 in /usr/local/lib/python3.10/dist-packages (from google-api-python-client&gt;=1.2-&gt;pydrive) (0.1.0)
-Requirement already satisfied: rsa&gt;=3.1.4 in /usr/local/lib/python3.10/dist-packages (from oauth2client&gt;=4.0.0-&gt;pydrive) (4.9)
-Requirement already satisfied: six&gt;=1.6.1 in /usr/local/lib/python3.10/dist-packages (from oauth2client&gt;=4.0.0-&gt;pydrive) (1.16.0)
+Requirement already satisfied: google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,&lt;3.0.0dev,&gt;=1.31.5 in /usr/local/lib/python3.10/dist-packages (from google-api-python-client&gt;=1.2-&gt;pydrive) (2.11.0)
+Requirement already satisfied: uritemplate&lt;5,&gt;=3.0.1 in /usr/local/lib/python3.10/dist-packages (from google-api-python-client&gt;=1.2-&gt;pydrive) (4.1.1)
 Requirement already satisfied: pyasn1&gt;=0.1.7 in /usr/local/lib/python3.10/dist-packages (from oauth2client&gt;=4.0.0-&gt;pydrive) (0.5.0)
 Requirement already satisfied: pyasn1-modules&gt;=0.0.5 in /usr/local/lib/python3.10/dist-packages (from oauth2client&gt;=4.0.0-&gt;pydrive) (0.3.0)
+Requirement already satisfied: rsa&gt;=3.1.4 in /usr/local/lib/python3.10/dist-packages (from oauth2client&gt;=4.0.0-&gt;pydrive) (4.9)
+Requirement already satisfied: six&gt;=1.6.1 in /usr/local/lib/python3.10/dist-packages (from oauth2client&gt;=4.0.0-&gt;pydrive) (1.16.0)
 Requirement already satisfied: googleapis-common-protos&lt;2.0dev,&gt;=1.56.2 in /usr/local/lib/python3.10/dist-packages (from google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,&lt;3.0.0dev,&gt;=1.31.5-&gt;google-api-python-client&gt;=1.2-&gt;pydrive) (1.59.0)
-Requirement already satisfied: requests&lt;3.0.0dev,&gt;=2.18.0 in /usr/local/lib/python3.10/dist-packages (from google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,&lt;3.0.0dev,&gt;=1.31.5-&gt;google-api-python-client&gt;=1.2-&gt;pydrive) (2.27.1)
 Requirement already satisfied: protobuf!=3.20.0,!=3.20.1,!=4.21.0,!=4.21.1,!=4.21.2,!=4.21.3,!=4.21.4,!=4.21.5,&lt;5.0.0dev,&gt;=3.19.5 in /usr/local/lib/python3.10/dist-packages (from google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,&lt;3.0.0dev,&gt;=1.31.5-&gt;google-api-python-client&gt;=1.2-&gt;pydrive) (3.20.3)
+Requirement already satisfied: requests&lt;3.0.0dev,&gt;=2.18.0 in /usr/local/lib/python3.10/dist-packages (from google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,&lt;3.0.0dev,&gt;=1.31.5-&gt;google-api-python-client&gt;=1.2-&gt;pydrive) (2.27.1)
 Requirement already satisfied: cachetools&lt;6.0,&gt;=2.0.0 in /usr/local/lib/python3.10/dist-packages (from google-auth&lt;3.0.0dev,&gt;=1.19.0-&gt;google-api-python-client&gt;=1.2-&gt;pydrive) (5.3.0)
 Requirement already satisfied: pyparsing!=3.0.0,!=3.0.1,!=3.0.2,!=3.0.3,&lt;4,&gt;=2.4.2 in /usr/local/lib/python3.10/dist-packages (from httplib2&lt;1dev,&gt;=0.15.0-&gt;google-api-python-client&gt;=1.2-&gt;pydrive) (3.0.9)
-Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/local/lib/python3.10/dist-packages (from requests&lt;3.0.0dev,&gt;=2.18.0-&gt;google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,&lt;3.0.0dev,&gt;=1.31.5-&gt;google-api-python-client&gt;=1.2-&gt;pydrive) (2.0.12)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.10/dist-packages (from requests&lt;3.0.0dev,&gt;=2.18.0-&gt;google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,&lt;3.0.0dev,&gt;=1.31.5-&gt;google-api-python-client&gt;=1.2-&gt;pydrive) (2022.12.7)
 Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/local/lib/python3.10/dist-packages (from requests&lt;3.0.0dev,&gt;=2.18.0-&gt;google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,&lt;3.0.0dev,&gt;=1.31.5-&gt;google-api-python-client&gt;=1.2-&gt;pydrive) (1.26.15)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.10/dist-packages (from requests&lt;3.0.0dev,&gt;=2.18.0-&gt;google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,&lt;3.0.0dev,&gt;=1.31.5-&gt;google-api-python-client&gt;=1.2-&gt;pydrive) (2022.12.7)
+Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/local/lib/python3.10/dist-packages (from requests&lt;3.0.0dev,&gt;=2.18.0-&gt;google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,&lt;3.0.0dev,&gt;=1.31.5-&gt;google-api-python-client&gt;=1.2-&gt;pydrive) (2.0.12)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/dist-packages (from requests&lt;3.0.0dev,&gt;=2.18.0-&gt;google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,&lt;3.0.0dev,&gt;=1.31.5-&gt;google-api-python-client&gt;=1.2-&gt;pydrive) (3.4)
 </pre></div>
 </div>
@@ -526,9 +529,7 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package punkt to /root/nltk_data...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]   Unzipping tokenizers/punkt.zip.
+[nltk_data]   Unzipping tokenizers/punkt.zip.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package stopwords to /root/nltk_data...
@@ -1388,7 +1389,7 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
   &#39;AYA TETAP PRABOWO KARENA NEGARA INI BUTUH PEMIMPIN YANG KUAT INGAT PD III DI DEPAN MATA DAN PRABOWO SIAP UNTUK MEMBELA RAKYAT DAN BANGSANYA KLW UNTUK WAKIL ANIS DAN GATOT SANGAT MUMPUNI DAN BANGSA INI AKAN AMAN DAN MAJU&#39;],
  [&#39;2022-08-01T02:37:00Z&#39;, &#39;Mochtar Hadi&#39;, &#39;Yg buat surve siapa dulu&#39;],
  [&#39;2022-07-31T22:12:54Z&#39;, &#39;Dimas Putra&#39;, &#39;Prabowo orangx mntp&#39;],
- [&#39;2022-07-31T01:56:17Z&#39;, &#39;야베스&#39;, &#39;Ganjar no1 maju pdip&#39;],
+ [&#39;2022-07-31T01:56:17Z&#39;, &#39;Mr.Ambatukam&#39;, &#39;Ganjar no1 maju pdip&#39;],
  [&#39;2022-07-30T00:40:18Z&#39;, &#39;Papasatpam Pam&#39;, &#39;Prreeetttttssss.....&#39;],
  [&#39;2022-07-27T04:18:08Z&#39;,
   &quot;Umu Sa&#39;adah&quot;,
@@ -1799,7 +1800,7 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-2594b4c5-8387-4812-973a-1eaf156b9779">
+  <div id="df-f252a612-37d6-4405-986d-3a873f95d4c9">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -1895,7 +1896,7 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 </table>
 <p>509 rows × 3 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-2594b4c5-8387-4812-973a-1eaf156b9779')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-f252a612-37d6-4405-986d-3a873f95d4c9')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
         
@@ -1946,12 +1947,12 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 
       <script>
         const buttonEl =
-          document.querySelector('#df-2594b4c5-8387-4812-973a-1eaf156b9779 button.colab-df-convert');
+          document.querySelector('#df-f252a612-37d6-4405-986d-3a873f95d4c9 button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-2594b4c5-8387-4812-973a-1eaf156b9779');
+          const element = document.querySelector('#df-f252a612-37d6-4405-986d-3a873f95d4c9');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -2074,7 +2075,7 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-21ff48c2-b253-4848-852c-de461a7055aa">
+  <div id="df-1d77434f-2ae4-4954-a167-aca6bb959644">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -2108,27 +2109,27 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
     </tr>
     <tr>
       <th>1</th>
-      <td>Menjadi kandidat terkuat dalam capres 2024, @g...</td>
+      <td>Kita harus bersama melawan parpol oportunis &amp;a...</td>
       <td>Indonesia</td>
       <td>Ganjaran_app</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Anies Baswedan berjanji jika terpilih sebagai ...</td>
-      <td>Pulo Gadung</td>
-      <td>tvOneNews</td>
+      <td>Menjadi kandidat terkuat dalam capres 2024, @g...</td>
+      <td>Indonesia</td>
+      <td>Ganjaran_app</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Pemilu 2024 Sesuai Tahapan\n#PemiluSerentak202...</td>
-      <td>Riau</td>
-      <td>Lienka_sani</td>
+      <td>RT @langkah_nyata: #airlanggahartarto #pemilu2...</td>
+      <td>Tiouw, Saparua, Maluku 🇮🇩</td>
+      <td>PatawalaRonny</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Pemilu 2024 Sesuai Tahapan\n#PemiluSerentak202...</td>
-      <td>Riau</td>
-      <td>Lienka_sani</td>
+      <td>RT @idtodayco: Polling Yuk! Biar tidak ada rek...</td>
+      <td></td>
+      <td>Mustafa81423871</td>
     </tr>
     <tr>
       <th>...</th>
@@ -2138,39 +2139,39 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
     </tr>
     <tr>
       <th>495</th>
-      <td>"Pilpres Jokowi dalam dua pemilu terdahulu Pra...</td>
-      <td>jakarta</td>
-      <td>fadyahrismaaul</td>
+      <td>Sebanyak 43,6% responden meyakini bahwa Jokowi...</td>
+      <td></td>
+      <td>daraasyfaa</td>
     </tr>
     <tr>
       <th>496</th>
-      <td>"Pilpres Jokowi dalam dua pemilu terdahulu Pra...</td>
-      <td>jakarta</td>
-      <td>hazmadesiasalsa</td>
+      <td>"Jokowi kelihatannya memandang Prabowo lebih c...</td>
+      <td></td>
+      <td>RizkaNaaa2</td>
     </tr>
     <tr>
       <th>497</th>
-      <td>Wow, elektabilitas Prabowo sangat meroket dala...</td>
-      <td>jakarta</td>
-      <td>hazmadesiasalsa</td>
+      <td>"Kemungkinan dukungan atau endorsement Preside...</td>
+      <td>tangerang</td>
+      <td>maulidyadanisa</td>
     </tr>
     <tr>
       <th>498</th>
-      <td>Wow, elektabilitas Prabowo sangat meroket dala...</td>
-      <td>jakarta</td>
-      <td>reginaoctav21</td>
+      <td>Elite PKB Sebut Bergabungnya Golkar Bakal Perk...</td>
+      <td>Jakarta, Indonesia</td>
+      <td>ryandanill</td>
     </tr>
     <tr>
       <th>499</th>
-      <td>"Dalam 2 bulan terakhir, pola dukungan publik ...</td>
-      <td>jakarta</td>
-      <td>fadyahrismaaul</td>
+      <td>"Yang penting bagi beliau (Prabowo) bukan beli...</td>
+      <td>Bogor, Indonesia.</td>
+      <td>balqisraveena</td>
     </tr>
   </tbody>
 </table>
 <p>500 rows × 3 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-21ff48c2-b253-4848-852c-de461a7055aa')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-1d77434f-2ae4-4954-a167-aca6bb959644')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
         
@@ -2221,12 +2222,12 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 
       <script>
         const buttonEl =
-          document.querySelector('#df-21ff48c2-b253-4848-852c-de461a7055aa button.colab-df-convert');
+          document.querySelector('#df-1d77434f-2ae4-4954-a167-aca6bb959644 button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-21ff48c2-b253-4848-852c-de461a7055aa');
+          const element = document.querySelector('#df-1d77434f-2ae4-4954-a167-aca6bb959644');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -2261,7 +2262,7 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-cd5f22c0-61c5-4adf-95c9-167568d6b656">
+  <div id="df-1a5be3b3-00d6-4fd2-af28-423a5370fa10">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -2294,22 +2295,22 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
     <tr>
       <th>1</th>
       <td>Yg penting AKU dan kwn kwn WNI yg di luar nege...</td>
-      <td>Menjadi kandidat terkuat dalam capres 2024, @g...</td>
+      <td>Kita harus bersama melawan parpol oportunis &amp;a...</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Aceh dan sesumatra prabowo RI 1</td>
-      <td>Anies Baswedan berjanji jika terpilih sebagai ...</td>
+      <td>Menjadi kandidat terkuat dalam capres 2024, @g...</td>
     </tr>
     <tr>
       <th>3</th>
       <td>saya gk memilih semua saya urus sgala macem re...</td>
-      <td>Pemilu 2024 Sesuai Tahapan\n#PemiluSerentak202...</td>
+      <td>RT @langkah_nyata: #airlanggahartarto #pemilu2...</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Kalau saya AHY dan Anis atau ma Rk aja .</td>
-      <td>Pemilu 2024 Sesuai Tahapan\n#PemiluSerentak202...</td>
+      <td>RT @idtodayco: Polling Yuk! Biar tidak ada rek...</td>
     </tr>
     <tr>
       <th>...</th>
@@ -2319,33 +2320,33 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
     <tr>
       <th>495</th>
       <td>Isi bensin pakai my Pertamina.... 😂😂😂 Auto ga ...</td>
-      <td>"Pilpres Jokowi dalam dua pemilu terdahulu Pra...</td>
+      <td>Sebanyak 43,6% responden meyakini bahwa Jokowi...</td>
     </tr>
     <tr>
       <th>496</th>
       <td>Pak ganjar👍</td>
-      <td>"Pilpres Jokowi dalam dua pemilu terdahulu Pra...</td>
+      <td>"Jokowi kelihatannya memandang Prabowo lebih c...</td>
     </tr>
     <tr>
       <th>497</th>
       <td>kalau saya lihat prabowo dan anies pas dan san...</td>
-      <td>Wow, elektabilitas Prabowo sangat meroket dala...</td>
+      <td>"Kemungkinan dukungan atau endorsement Preside...</td>
     </tr>
     <tr>
       <th>498</th>
       <td>Hati2 survei abal2...bro...</td>
-      <td>Wow, elektabilitas Prabowo sangat meroket dala...</td>
+      <td>Elite PKB Sebut Bergabungnya Golkar Bakal Perk...</td>
     </tr>
     <tr>
       <th>499</th>
       <td>0</td>
-      <td>"Dalam 2 bulan terakhir, pola dukungan publik ...</td>
+      <td>"Yang penting bagi beliau (Prabowo) bukan beli...</td>
     </tr>
   </tbody>
 </table>
 <p>500 rows × 2 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-cd5f22c0-61c5-4adf-95c9-167568d6b656')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-1a5be3b3-00d6-4fd2-af28-423a5370fa10')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
         
@@ -2396,12 +2397,12 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 
       <script>
         const buttonEl =
-          document.querySelector('#df-cd5f22c0-61c5-4adf-95c9-167568d6b656 button.colab-df-convert');
+          document.querySelector('#df-1a5be3b3-00d6-4fd2-af28-423a5370fa10 button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-cd5f22c0-61c5-4adf-95c9-167568d6b656');
+          const element = document.querySelector('#df-1a5be3b3-00d6-4fd2-af28-423a5370fa10');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -2528,7 +2529,7 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-49e99f12-2ed7-4750-ac5f-0b38dd1b6e32">
+  <div id="df-8ba78c3a-bdd1-43bd-adcf-3efd83faa818">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -2568,6 +2569,15 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
     </tr>
     <tr>
       <th>1</th>
+      <td>Kita harus bersama melawan parpol oportunis &amp;a...</td>
+      <td>Kita harus bersama melawan parpol oportunis am...</td>
+      <td>[kita, harus, bersama, melawan, parpol, oportu...</td>
+      <td>[melawan, parpol, oportunis, amp, memilih, pem...</td>
+      <td>[melawan, parpol, oportunis, amp, memilih, pem...</td>
+      <td>melawan parpol oportuni amp memilih pemimpin y...</td>
+    </tr>
+    <tr>
+      <th>2</th>
       <td>Menjadi kandidat terkuat dalam capres 2024, @g...</td>
       <td>Menjadi kandidat terkuat dalam capres 2024  me...</td>
       <td>[menjadi, kandidat, terkuat, dalam, capres, 20...</td>
@@ -2576,31 +2586,22 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
       <td>kandidat terkuat capr 2024 sinyal dukungan</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>Anies Baswedan berjanji jika terpilih sebagai ...</td>
-      <td>Anies Baswedan berjanji jika terpilih sebagai ...</td>
-      <td>[anies, baswedan, berjanji, jika, terpilih, se...</td>
-      <td>[anies, baswedan, berjanji, terpilih, presiden...</td>
-      <td>[anies, baswedan, berjanji, terpilih, presiden...</td>
-      <td>ani baswedan berjanji terpilih presiden menjal...</td>
-    </tr>
-    <tr>
       <th>3</th>
-      <td>Pemilu 2024 Sesuai Tahapan\n#PemiluSerentak202...</td>
-      <td>Pemilu 2024 Sesuai Tahapan</td>
-      <td>[pemilu, 2024, sesuai, tahapan]</td>
-      <td>[pemilu, 2024, sesuai, tahapan]</td>
-      <td>[pemilu, 2024, sesuai, tahapan]</td>
-      <td>pemilu 2024 sesuai tahapan</td>
+      <td>RT @langkah_nyata: #airlanggahartarto #pemilu2...</td>
+      <td>RT</td>
+      <td>[rt]</td>
+      <td>[rt]</td>
+      <td>[rt]</td>
+      <td>rt</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Pemilu 2024 Sesuai Tahapan\n#PemiluSerentak202...</td>
-      <td>Pemilu 2024 Sesuai Tahapan</td>
-      <td>[pemilu, 2024, sesuai, tahapan]</td>
-      <td>[pemilu, 2024, sesuai, tahapan]</td>
-      <td>[pemilu, 2024, sesuai, tahapan]</td>
-      <td>pemilu 2024 sesuai tahapan</td>
+      <td>RT @idtodayco: Polling Yuk! Biar tidak ada rek...</td>
+      <td>RT  Polling Yuk Biar tidak ada rekayasa di ant...</td>
+      <td>[rt, polling, yuk, biar, tidak, ada, rekayasa,...</td>
+      <td>[rt, polling, yuk, biar, rekayasa, rakyat, ind...</td>
+      <td>[rt, polling, yuk, biar, rekayasa, rakyat, ind...</td>
+      <td>rt poll yuk biar rekayasa rakyat indonesiapili...</td>
     </tr>
     <tr>
       <th>...</th>
@@ -2613,54 +2614,54 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
     </tr>
     <tr>
       <th>495</th>
-      <td>"Pilpres Jokowi dalam dua pemilu terdahulu Pra...</td>
-      <td>Pilpres Jokowi dalam dua pemilu terdahulu Prab...</td>
-      <td>[pilpres, jokowi, dalam, dua, pemilu, terdahul...</td>
-      <td>[pilpres, jokowi, pemilu, prabowo, diasosiasik...</td>
-      <td>[pilpres, jokowi, pemilu, prabowo, diasosiasik...</td>
-      <td>pilpr jokowi pemilu prabowo diasosiasikan baca...</td>
+      <td>Sebanyak 43,6% responden meyakini bahwa Jokowi...</td>
+      <td>Sebanyak 436 responden meyakini bahwa Jokowi a...</td>
+      <td>[sebanyak, 436, responden, meyakini, bahwa, jo...</td>
+      <td>[436, responden, jokowi, mendukung, prabowo, s...</td>
+      <td>[436, responden, jokowi, mendukung, prabowo, s...</td>
+      <td>436 responden jokowi mendukung prabowo subiant...</td>
     </tr>
     <tr>
       <th>496</th>
-      <td>"Pilpres Jokowi dalam dua pemilu terdahulu Pra...</td>
-      <td>Pilpres Jokowi dalam dua pemilu terdahulu Prab...</td>
-      <td>[pilpres, jokowi, dalam, dua, pemilu, terdahul...</td>
-      <td>[pilpres, jokowi, pemilu, prabowo, diasosiasik...</td>
-      <td>[pilpres, jokowi, pemilu, prabowo, diasosiasik...</td>
-      <td>pilpr jokowi pemilu prabowo diasosiasikan baca...</td>
+      <td>"Jokowi kelihatannya memandang Prabowo lebih c...</td>
+      <td>Jokowi kelihatannya memandang Prabowo lebih co...</td>
+      <td>[jokowi, kelihatannya, memandang, prabowo, leb...</td>
+      <td>[jokowi, memandang, prabowo, cocok, menggantik...</td>
+      <td>[jokowi, memandang, prabowo, cocok, menggantik...</td>
+      <td>jokowi memandang prabowo cocok menggantikan ge...</td>
     </tr>
     <tr>
       <th>497</th>
-      <td>Wow, elektabilitas Prabowo sangat meroket dala...</td>
-      <td>Wow elektabilitas Prabowo sangat meroket dalam...</td>
-      <td>[wow, elektabilitas, prabowo, sangat, meroket,...</td>
-      <td>[wow, elektabilitas, prabowo, meroket]</td>
-      <td>[wow, elektabilitas, prabowo, meroket]</td>
-      <td>wow elektabilita prabowo meroket</td>
+      <td>"Kemungkinan dukungan atau endorsement Preside...</td>
+      <td>Kemungkinan dukungan atau endorsement Presiden...</td>
+      <td>[kemungkinan, dukungan, atau, endorsement, pre...</td>
+      <td>[dukungan, endorsement, presiden, jokowi, prab...</td>
+      <td>[dukungan, endorsement, presiden, jokowi, prab...</td>
+      <td>dukungan endors presiden jokowi prabowo subian...</td>
     </tr>
     <tr>
       <th>498</th>
-      <td>Wow, elektabilitas Prabowo sangat meroket dala...</td>
-      <td>Wow elektabilitas Prabowo sangat meroket dalam...</td>
-      <td>[wow, elektabilitas, prabowo, sangat, meroket,...</td>
-      <td>[wow, elektabilitas, prabowo, meroket]</td>
-      <td>[wow, elektabilitas, prabowo, meroket]</td>
-      <td>wow elektabilita prabowo meroket</td>
+      <td>Elite PKB Sebut Bergabungnya Golkar Bakal Perk...</td>
+      <td>Elite PKB Sebut Bergabungnya Golkar Bakal Perk...</td>
+      <td>[elite, pkb, sebut, bergabungnya, golkar, baka...</td>
+      <td>[elite, pkb, bergabungnya, golkar, perkuat, pa...</td>
+      <td>[elite, pkb, bergabungnya, golkar, perkuat, pa...</td>
+      <td>elit pkb bergabungnya golkar perkuat pasangan ...</td>
     </tr>
     <tr>
       <th>499</th>
-      <td>"Dalam 2 bulan terakhir, pola dukungan publik ...</td>
-      <td>Dalam 2 bulan terakhir pola dukungan publik te...</td>
-      <td>[dalam, 2, bulan, terakhir, pola, dukungan, pu...</td>
-      <td>[2, pola, dukungan, publik, prabowo, cenderung...</td>
-      <td>[2, pola, dukungan, publik, prabowo, cenderung...</td>
-      <td>2 pola dukungan publik prabowo cenderung mengi...</td>
+      <td>"Yang penting bagi beliau (Prabowo) bukan beli...</td>
+      <td>Yang penting bagi beliau Prabowo bukan beliau ...</td>
+      <td>[yang, penting, bagi, beliau, prabowo, bukan, ...</td>
+      <td>[beliau, prabowo, beliau, berkhianat, habiburo...</td>
+      <td>[beliau, prabowo, beliau, berkhianat, habiburo...</td>
+      <td>beliau prabowo beliau berkhianat habiburokhman...</td>
     </tr>
   </tbody>
 </table>
 <p>500 rows × 6 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-49e99f12-2ed7-4750-ac5f-0b38dd1b6e32')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-8ba78c3a-bdd1-43bd-adcf-3efd83faa818')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
         
@@ -2711,12 +2712,12 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 
       <script>
         const buttonEl =
-          document.querySelector('#df-49e99f12-2ed7-4750-ac5f-0b38dd1b6e32 button.colab-df-convert');
+          document.querySelector('#df-8ba78c3a-bdd1-43bd-adcf-3efd83faa818 button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-49e99f12-2ed7-4750-ac5f-0b38dd1b6e32');
+          const element = document.querySelector('#df-8ba78c3a-bdd1-43bd-adcf-3efd83faa818');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -2746,7 +2747,7 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-e36db537-f847-400a-9898-8932afc9b01a">
+  <div id="df-53d28dbb-d37e-4145-a83c-4aa60420dc36">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -2776,19 +2777,19 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
     </tr>
     <tr>
       <th>1</th>
-      <td>kandidat terkuat capr 2024 sinyal dukungan</td>
+      <td>melawan parpol oportuni amp memilih pemimpin y...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>ani baswedan berjanji terpilih presiden menjal...</td>
+      <td>kandidat terkuat capr 2024 sinyal dukungan</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>pemilu 2024 sesuai tahapan</td>
+      <td>rt</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>pemilu 2024 sesuai tahapan</td>
+      <td>rt poll yuk biar rekayasa rakyat indonesiapili...</td>
     </tr>
     <tr>
       <th>...</th>
@@ -2796,29 +2797,29 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
     </tr>
     <tr>
       <th>495</th>
-      <td>pilpr jokowi pemilu prabowo diasosiasikan baca...</td>
+      <td>436 responden jokowi mendukung prabowo subiant...</td>
     </tr>
     <tr>
       <th>496</th>
-      <td>pilpr jokowi pemilu prabowo diasosiasikan baca...</td>
+      <td>jokowi memandang prabowo cocok menggantikan ge...</td>
     </tr>
     <tr>
       <th>497</th>
-      <td>wow elektabilita prabowo meroket</td>
+      <td>dukungan endors presiden jokowi prabowo subian...</td>
     </tr>
     <tr>
       <th>498</th>
-      <td>wow elektabilita prabowo meroket</td>
+      <td>elit pkb bergabungnya golkar perkuat pasangan ...</td>
     </tr>
     <tr>
       <th>499</th>
-      <td>2 pola dukungan publik prabowo cenderung mengi...</td>
+      <td>beliau prabowo beliau berkhianat habiburokhman...</td>
     </tr>
   </tbody>
 </table>
 <p>500 rows × 1 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-e36db537-f847-400a-9898-8932afc9b01a')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-53d28dbb-d37e-4145-a83c-4aa60420dc36')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
         
@@ -2869,12 +2870,12 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 
       <script>
         const buttonEl =
-          document.querySelector('#df-e36db537-f847-400a-9898-8932afc9b01a button.colab-df-convert');
+          document.querySelector('#df-53d28dbb-d37e-4145-a83c-4aa60420dc36 button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-e36db537-f847-400a-9898-8932afc9b01a');
+          const element = document.querySelector('#df-53d28dbb-d37e-4145-a83c-4aa60420dc36');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -2904,7 +2905,7 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-c99d33c7-f5bc-4060-bf8b-26079e7c667f">
+  <div id="df-0dad8913-da7f-4481-af21-c996553ed244">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -2934,49 +2935,188 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
     </tr>
     <tr>
       <th>1</th>
-      <td>kandidat terkuat capr 2024 sinyal dukungan</td>
+      <td>melawan parpol oportuni amp memilih pemimpin y...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>ani baswedan berjanji terpilih presiden menjal...</td>
+      <td>kandidat terkuat capr 2024 sinyal dukungan</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>pemilu 2024 sesuai tahapan</td>
+      <td>rt</td>
     </tr>
     <tr>
       <th>4</th>
       <td>rt poll yuk biar rekayasa rakyat indonesiapili...</td>
     </tr>
     <tr>
-      <th>...</th>
-      <td>...</td>
+      <th>5</th>
+      <td></td>
     </tr>
     <tr>
-      <th>202</th>
-      <td>keren elektabilita prabowo dibandingkan paslon...</td>
+      <th>6</th>
+      <td>ganjar pranowo menghadiri ngunduh mantu istrin...</td>
     </tr>
     <tr>
-      <th>203</th>
-      <td>wow elektabilita prabowo meroket</td>
+      <th>7</th>
+      <td>rt panik ya ganjar di cfd bandung penuhi hati ...</td>
     </tr>
     <tr>
-      <th>204</th>
-      <td>pilpr jokowi pemilu prabowo diasosiasikan baca...</td>
+      <th>8</th>
+      <td>rt mown jelang siang lur selamat minggucapres2...</td>
     </tr>
     <tr>
-      <th>205</th>
-      <td>keberhasilan menhan prabowo menuai dukungan pe...</td>
+      <th>9</th>
+      <td>dukungan ganjar pranowo mahasiswa reformasi</td>
     </tr>
     <tr>
-      <th>206</th>
-      <td>2 pola dukungan publik prabowo cenderung mengi...</td>
+      <th>10</th>
+      <td>malu enggak ya</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>capres2024 gubernur yang layak dipilih berdasa...</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>rt poll yuk biar rekayasa rakyat indonesiapili...</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>rt disaat cebong kampret cak imin ditengah men...</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>pelanpelan turunnya pelanpelan argentina bende...</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>mantap pdip babel menangkan ganjar pranowo ri1...</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>partai2 politik yang mencari capr non prestasi...</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>rt poll yuk biar rekayasa rakyat indonesiapili...</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>suka bikin hoak ganjar semoga cepat sadar arge...</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>hubbul wathon minal iman cinta tanah air nasio...</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>erick thohir sosok layak mengisi kekosongan ku...</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>menteri bumn erick thohir cocok cawapr mendamp...</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>erick thohir cocok prabowo subianto mendongkra...</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>prabowo bertahan puncak elektabilita tren mena...</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>nama prabowo subianto pemenang elektabilita 31...</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>direktur eksekutif lsn gema nusantara bakri pr...</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>prabowo unggul posisi terata daftar elektabili...</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>survei lsn prabowo subianto unggul posisi tera...</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>prabowo melanjutkan programprogram nasionalnya...</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>jokowi memandang prabowo cocok menggantikan ge...</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>dukungan endors presiden jokowi prabowo subian...</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>gema menilai presiden jokowi prabowo sosok mel...</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>436 responden jokowi mendukung prabowo subiant...</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>mayorita publik survei terbaru lsn presiden jo...</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>survei lsn mayorita publik jokowi dukung prabo...</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>erick thohir sosok layak mengisi kekosongan ku...</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>merujuk kesepakatan pkb gerindra diputuskan ca...</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>menteri bumn erick thohir cocok cawapr mendamp...</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>elit pkb bergabungnya golkar perkuat pasangan ...</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>erick thohir cocok prabowo subianto mendongkra...</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>beliau prabowo beliau berkhianat habiburokhman...</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>prabowo bertahan puncak elektabilita tren mena...</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>beliau prabowo kepentingan bangsa habiburokhma...</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>nama prabowo subianto pemenang elektabilita 31...</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>salut beliau prabowo ikhla enggak bawa perasaa...</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>direktur eksekutif lsn gema nusantara bakri pr...</td>
     </tr>
   </tbody>
 </table>
-<p>207 rows × 1 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-c99d33c7-f5bc-4060-bf8b-26079e7c667f')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-0dad8913-da7f-4481-af21-c996553ed244')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
         
@@ -3027,12 +3167,12 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 
       <script>
         const buttonEl =
-          document.querySelector('#df-c99d33c7-f5bc-4060-bf8b-26079e7c667f button.colab-df-convert');
+          document.querySelector('#df-0dad8913-da7f-4481-af21-c996553ed244 button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-c99d33c7-f5bc-4060-bf8b-26079e7c667f');
+          const element = document.querySelector('#df-0dad8913-da7f-4481-af21-c996553ed244');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -3106,7 +3246,7 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-11d622c5-d447-469e-8643-5ce3f628fe33">
+  <div id="df-8097d2e0-9b50-4ec7-8263-daa168e48dbb">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -3238,7 +3378,7 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 </table>
 <p>500 rows × 6 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-11d622c5-d447-469e-8643-5ce3f628fe33')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-8097d2e0-9b50-4ec7-8263-daa168e48dbb')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
         
@@ -3289,12 +3429,12 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 
       <script>
         const buttonEl =
-          document.querySelector('#df-11d622c5-d447-469e-8643-5ce3f628fe33 button.colab-df-convert');
+          document.querySelector('#df-8097d2e0-9b50-4ec7-8263-daa168e48dbb button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-11d622c5-d447-469e-8643-5ce3f628fe33');
+          const element = document.querySelector('#df-8097d2e0-9b50-4ec7-8263-daa168e48dbb');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -3324,7 +3464,7 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-e1dd541b-77cf-402b-94a7-21c8c36f6c81">
+  <div id="df-e83bcc7b-ef4c-4cd0-8a16-c39b540a307f">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -3396,7 +3536,7 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 </table>
 <p>500 rows × 1 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-e1dd541b-77cf-402b-94a7-21c8c36f6c81')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-e83bcc7b-ef4c-4cd0-8a16-c39b540a307f')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
         
@@ -3447,12 +3587,12 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 
       <script>
         const buttonEl =
-          document.querySelector('#df-e1dd541b-77cf-402b-94a7-21c8c36f6c81 button.colab-df-convert');
+          document.querySelector('#df-e83bcc7b-ef4c-4cd0-8a16-c39b540a307f button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-e1dd541b-77cf-402b-94a7-21c8c36f6c81');
+          const element = document.querySelector('#df-e83bcc7b-ef4c-4cd0-8a16-c39b540a307f');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -3482,7 +3622,7 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-d627c3bd-9d0e-4ffe-a9bd-e18faae5f861">
+  <div id="df-b0e86f2a-43ad-4066-92b7-5dbd8597862e">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -3554,7 +3694,7 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 </table>
 <p>487 rows × 1 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-d627c3bd-9d0e-4ffe-a9bd-e18faae5f861')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-b0e86f2a-43ad-4066-92b7-5dbd8597862e')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
         
@@ -3605,12 +3745,12 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 
       <script>
         const buttonEl =
-          document.querySelector('#df-d627c3bd-9d0e-4ffe-a9bd-e18faae5f861 button.colab-df-convert');
+          document.querySelector('#df-b0e86f2a-43ad-4066-92b7-5dbd8597862e button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-d627c3bd-9d0e-4ffe-a9bd-e18faae5f861');
+          const element = document.querySelector('#df-b0e86f2a-43ad-4066-92b7-5dbd8597862e');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -3654,7 +3794,7 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-5d617b8e-155f-492b-84cd-18578dd1d1df">
+  <div id="df-d3ba2135-a4a8-4b75-a42e-88adbbab00bd">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -3726,7 +3866,7 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 </table>
 <p>208 rows × 1 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-5d617b8e-155f-492b-84cd-18578dd1d1df')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-d3ba2135-a4a8-4b75-a42e-88adbbab00bd')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
         
@@ -3777,12 +3917,12 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 
       <script>
         const buttonEl =
-          document.querySelector('#df-5d617b8e-155f-492b-84cd-18578dd1d1df button.colab-df-convert');
+          document.querySelector('#df-d3ba2135-a4a8-4b75-a42e-88adbbab00bd button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-5d617b8e-155f-492b-84cd-18578dd1d1df');
+          const element = document.querySelector('#df-d3ba2135-a4a8-4b75-a42e-88adbbab00bd');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -3813,7 +3953,7 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-0111a20f-69d5-4b6d-819d-6a6bd2671619">
+  <div id="df-c676360e-f30c-448f-96ed-758e5726badd">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -3885,7 +4025,7 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 </table>
 <p>487 rows × 1 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-0111a20f-69d5-4b6d-819d-6a6bd2671619')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-c676360e-f30c-448f-96ed-758e5726badd')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
         
@@ -3936,12 +4076,12 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 
       <script>
         const buttonEl =
-          document.querySelector('#df-0111a20f-69d5-4b6d-819d-6a6bd2671619 button.colab-df-convert');
+          document.querySelector('#df-c676360e-f30c-448f-96ed-758e5726badd button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-0111a20f-69d5-4b6d-819d-6a6bd2671619');
+          const element = document.querySelector('#df-c676360e-f30c-448f-96ed-758e5726badd');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -4003,13 +4143,13 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definisikan nilai dari topik atau komponen</span>
-<span class="n">num_components</span><span class="o">=</span><span class="mi">20</span>
+<span class="n">num_components</span><span class="o">=</span><span class="mi">4</span>
 
 <span class="c1"># Membuat objek SVD</span>
 <span class="n">lsa_tw</span> <span class="o">=</span> <span class="n">TruncatedSVD</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">num_components</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
 <span class="c1"># Fitting Model SVD ke data</span>
-<span class="n">lsa_tw</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train_data_tw</span><span class="p">)</span>
+<span class="n">lsa_fit_tw</span> <span class="o">=</span> <span class="n">lsa_tw</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train_data_tw</span><span class="p">)</span>
 
 <span class="c1"># Mendapatkan nilai Singular dan Komponen</span>
 <span class="n">Sigma_tw</span> <span class="o">=</span> <span class="n">lsa_tw</span><span class="o">.</span><span class="n">singular_values_</span>
@@ -4018,6 +4158,8 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
 </div>
 </div>
 </div>
+<div class="section" id="bobot-kata-terhadap-masing-masing-topik">
+<h5>Bobot Kata Terhadap Masing - Masing Topik<a class="headerlink" href="#bobot-kata-terhadap-masing-masing-topik" title="Permalink to this heading">#</a></h5>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">terms_tw</span> <span class="o">=</span> <span class="n">tfidf_tw</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span> 
@@ -4026,33 +4168,242 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/d
     <span class="n">zipped</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">terms_tw</span><span class="p">,</span> <span class="n">component</span><span class="p">)</span>
     <span class="n">top_terms_key</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">zipped</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
     <span class="n">top_terms_list</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">top_terms_key</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topik &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;: &quot;</span><span class="p">,</span><span class="n">top_terms_list</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topik &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;: &quot;</span><span class="p">,</span><span class="n">top_terms_key</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Topik 0:  [&#39;capres2024&#39;, &#39;dekade08&#39;, &#39;mendingprabowo&#39;, &#39;terusmajubersamaprabowo&#39;, &#39;prabowo&#39;]
-Topik 1:  [&#39;tanah&#39;, &#39;datar&#39;, &#39;kuda&#39;, &#39;pacu&#39;, &#39;open&#39;]
-Topik 2:  [&#39;berkuda&#39;, &#39;olahraga&#39;, &#39;berkembang&#39;, &#39;pesat&#39;, &#39;pemda&#39;]
-Topik 3:  [&#39;minang&#39;, &#39;unggulan&#39;, &#39;bibit&#39;, &#39;kuda&#39;, &#39;rakyat&#39;]
-Topik 4:  [&#39;barat&#39;, &#39;sumatera&#39;, &#39;kasih&#39;, &#39;terima&#39;, &#39;gerindra&#39;]
-Topik 5:  [&#39;kasih&#39;, &#39;terima&#39;, &#39;elektabilita&#39;, &#39;diterima&#39;, &#39;kampung&#39;]
-Topik 6:  [&#39;jokowi&#39;, &#39;presiden&#39;, &#39;kasih&#39;, &#39;terima&#39;, &#39;kampung&#39;]
-Topik 7:  [&#39;minang&#39;, &#39;pemda&#39;, &#39;menhan&#39;, &#39;subianto&#39;, &#39;mengembangkan&#39;]
-Topik 8:  [&#39;capr&#39;, &#39;2024&#39;, &#39;kasih&#39;, &#39;terima&#39;, &#39;pilpr&#39;]
-Topik 9:  [&#39;partai&#39;, &#39;presiden&#39;, &#39;politik&#39;, &#39;buruh&#39;, &#39;mengaku&#39;]
-Topik 10:  [&#39;kirim&#39;, &#39;bidang&#39;, &#39;anak&#39;, &#39;muda&#39;, &#39;berbakat&#39;]
-Topik 11:  [&#39;politik&#39;, &#39;rt&#39;, &#39;capr&#39;, &#39;erick&#39;, &#39;nu&#39;]
-Topik 12:  [&#39;capr&#39;, &#39;diasosiasikan&#39;, &#39;direstui&#39;, &#39;presiden&#39;, &#39;keren&#39;]
-Topik 13:  [&#39;masyarakat&#39;, &#39;rt&#39;, &#39;sumbar&#39;, &#39;ganjar&#39;, &#39;acara&#39;]
-Topik 14:  [&#39;anak&#39;, &#39;muda&#39;, &#39;berbakat&#39;, &#39;jakarta&#39;, &#39;joki&#39;]
-Topik 15:  [&#39;persen&#39;, &#39;317&#39;, &#39;subianto&#39;, &#39;mantap&#39;, &#39;rt&#39;]
-Topik 16:  [&#39;bangga&#39;, &#39;persen&#39;, &#39;pemda&#39;, &#39;bupati&#39;, &#39;sumbar&#39;]
-Topik 17:  [&#39;menhan&#39;, &#39;binatang&#39;, &#39;dirawat&#39;, &#39;pencinta&#39;, &#39;kudakuda&#39;]
-Topik 18:  [&#39;binatang&#39;, &#39;dirawat&#39;, &#39;pencinta&#39;, &#39;kudakuda&#39;, &#39;jokowi&#39;]
-Topik 19:  [&#39;hak&#39;, &#39;yang&#39;, &#39;persen&#39;, &#39;memiliki&#39;, &#39;ya&#39;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Topik 0:  [(&#39;capres2024&#39;, 0.3376966693074691), (&#39;dekade08&#39;, 0.3376966693074691), (&#39;mendingprabowo&#39;, 0.3376966693074691), (&#39;terusmajubersamaprabowo&#39;, 0.3376966693074691), (&#39;prabowo&#39;, 0.31460650838196963)]
+Topik 1:  [(&#39;tanah&#39;, 0.3471822065808759), (&#39;datar&#39;, 0.34683027458504356), (&#39;kuda&#39;, 0.2603831035525985), (&#39;pacu&#39;, 0.17279404206126853), (&#39;open&#39;, 0.16485373084465207)]
+Topik 2:  [(&#39;berkuda&#39;, 0.44413817937458666), (&#39;olahraga&#39;, 0.43265529356242666), (&#39;berkembang&#39;, 0.22693924533027166), (&#39;pesat&#39;, 0.22693924533027166), (&#39;pemda&#39;, 0.15920174266507456)]
+Topik 3:  [(&#39;minang&#39;, 0.25008019625178907), (&#39;unggulan&#39;, 0.24780206532101998), (&#39;bibit&#39;, 0.2036929581530511), (&#39;kuda&#39;, 0.1738033183136155), (&#39;rakyat&#39;, 0.1370816512068309)]
 </pre></div>
 </div>
+</div>
+</div>
+</div>
+<div class="section" id="bobot-setiap-topik-terhadap-dokumen">
+<h5>Bobot Setiap Topik Terhadap Dokumen<a class="headerlink" href="#bobot-setiap-topik-terhadap-dokumen" title="Permalink to this heading">#</a></h5>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_lsa_tw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lsa_fit_tw</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Topik 0&quot;</span><span class="p">,</span> <span class="s2">&quot;Topik 1&quot;</span><span class="p">,</span> <span class="s2">&quot;Topik 2&quot;</span><span class="p">,</span> <span class="s2">&quot;Topik 3&quot;</span><span class="p">])</span>
+<span class="n">df_lsa_tw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_tw</span><span class="p">[</span><span class="s2">&quot;Tweets&quot;</span><span class="p">],</span> <span class="n">df_lsa_tw</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_lsa_tw</span><span class="p">[</span><span class="s1">&#39;Topik&#39;</span><span class="p">]</span><span class="o">=</span> <span class="n">df_lsa_tw</span><span class="p">[[</span><span class="s1">&#39;Topik 0&#39;</span><span class="p">,</span> <span class="s1">&#39;Topik 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Topik 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Topik 3&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">argmax</span><span class="p">(),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">df_lsa_tw</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-271c8410-4c4c-41d4-a3be-9e56f7eda91f">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Tweets</th>
+      <th>Topik 0</th>
+      <th>Topik 1</th>
+      <th>Topik 2</th>
+      <th>Topik 3</th>
+      <th>Topik</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>terbukti pemimpin cocok kalangan kalangan anak...</td>
+      <td>0.008740</td>
+      <td>-0.009255</td>
+      <td>0.021207</td>
+      <td>0.011610</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>kandidat terkuat capr 2024 sinyal dukungan</td>
+      <td>0.040344</td>
+      <td>-0.118837</td>
+      <td>-0.059913</td>
+      <td>-0.054272</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ani baswedan berjanji terpilih presiden menjal...</td>
+      <td>0.026005</td>
+      <td>-0.058597</td>
+      <td>-0.046404</td>
+      <td>-0.004116</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>rt memiliki hak yang</td>
+      <td>0.008222</td>
+      <td>-0.022280</td>
+      <td>-0.019604</td>
+      <td>0.005892</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>memiliki hak yang</td>
+      <td>0.007108</td>
+      <td>-0.011084</td>
+      <td>-0.011085</td>
+      <td>0.008531</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>203</th>
+      <td>keren elektabilita prabowo dibandingkan paslon...</td>
+      <td>0.086200</td>
+      <td>-0.231225</td>
+      <td>-0.179384</td>
+      <td>-0.324534</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>204</th>
+      <td>wow elektabilita prabowo meroket</td>
+      <td>0.097397</td>
+      <td>-0.224298</td>
+      <td>-0.180489</td>
+      <td>-0.331055</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>205</th>
+      <td>pilpr jokowi pemilu prabowo diasosiasikan baca...</td>
+      <td>0.093977</td>
+      <td>-0.220673</td>
+      <td>-0.127518</td>
+      <td>-0.067240</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>206</th>
+      <td>keberhasilan menhan prabowo menuai dukungan pe...</td>
+      <td>0.086939</td>
+      <td>-0.106574</td>
+      <td>-0.064694</td>
+      <td>-0.059633</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>207</th>
+      <td>2 pola dukungan publik prabowo cenderung mengi...</td>
+      <td>0.058805</td>
+      <td>-0.110180</td>
+      <td>-0.063883</td>
+      <td>-0.055091</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>208 rows × 6 columns</p>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-271c8410-4c4c-41d4-a3be-9e56f7eda91f')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+        
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+      
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-271c8410-4c4c-41d4-a3be-9e56f7eda91f button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-271c8410-4c4c-41d4-a3be-9e56f7eda91f');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+  </div></div>
 </div>
 </div>
 </div>
@@ -4061,13 +4412,13 @@ Topik 19:  [&#39;hak&#39;, &#39;yang&#39;, &#39;persen&#39;, &#39;memiliki&#39;,
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definisikan nilai dari topik atau komponen</span>
-<span class="n">num_components</span><span class="o">=</span><span class="mi">20</span>
+<span class="n">num_components</span><span class="o">=</span><span class="mi">4</span>
 
 <span class="c1"># Membuat objek SVD</span>
 <span class="n">lsa_yt</span> <span class="o">=</span> <span class="n">TruncatedSVD</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">num_components</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
 <span class="c1"># Fitting Model SVD ke data</span>
-<span class="n">lsa_yt</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train_data_yt</span><span class="p">)</span>
+<span class="n">lsa_fit_yt</span> <span class="o">=</span> <span class="n">lsa_yt</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train_data_yt</span><span class="p">)</span>
 
 <span class="c1"># Mendapatkan nilai Singular dan Komponen</span>
 <span class="n">Sigma_yt</span> <span class="o">=</span> <span class="n">lsa_yt</span><span class="o">.</span><span class="n">singular_values_</span>
@@ -4076,6 +4427,8 @@ Topik 19:  [&#39;hak&#39;, &#39;yang&#39;, &#39;persen&#39;, &#39;memiliki&#39;,
 </div>
 </div>
 </div>
+<div class="section" id="id1">
+<h5>Bobot Kata Terhadap Masing - Masing Topik<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h5>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">terms_yt</span> <span class="o">=</span> <span class="n">tfidf_yt</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span> 
@@ -4084,33 +4437,242 @@ Topik 19:  [&#39;hak&#39;, &#39;yang&#39;, &#39;persen&#39;, &#39;memiliki&#39;,
     <span class="n">zipped</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">terms_yt</span><span class="p">,</span> <span class="n">component</span><span class="p">)</span>
     <span class="n">top_terms_key</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">zipped</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
     <span class="n">top_terms_list</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">top_terms_key</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topik &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;: &quot;</span><span class="p">,</span><span class="n">top_terms_list</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topik &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;: &quot;</span><span class="p">,</span><span class="n">top_terms_key</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Topik 0:  [&#39;ani&#39;, &#39;yang&#39;, &#39;ganjar&#39;, &#39;prabowo&#39;, &#39;pilih&#39;]
-Topik 1:  [&#39;ganjar&#39;, &#39;prabowo&#39;, &#39;pranowo&#39;, &#39;ahok&#39;, &#39;ri&#39;]
-Topik 2:  [&#39;abal&#39;, &#39;survei&#39;, &#39;survey&#39;, &#39;percaya&#39;, &#39;bayaran&#39;]
-Topik 3:  [&#39;prabowo&#39;, &#39;ahok&#39;, &#39;pilih&#39;, &#39;kamil&#39;, &#39;2024&#39;]
-Topik 4:  [&#39;yang&#39;, &#39;rakyat&#39;, &#39;enggak&#39;, &#39;pemimpin&#39;, &#39;surv&#39;]
-Topik 5:  [&#39;survey&#39;, &#39;abal&#39;, &#39;ab&#39;, &#39;prabowo&#39;, &#39;bayar&#39;]
-Topik 6:  [&#39;kamil&#39;, &#39;ridwan&#39;, &#39;abal&#39;, &#39;pilih&#39;, &#39;yang&#39;]
-Topik 7:  [&#39;abal&#39;, &#39;2024&#39;, &#39;yang&#39;, &#39;prabowo&#39;, &#39;pranowo&#39;]
-Topik 8:  [&#39;pilih&#39;, &#39;enggak&#39;, &#39;abal&#39;, &#39;percaya&#39;, &#39;ahi&#39;]
-Topik 9:  [&#39;pilih&#39;, &#39;survei&#39;, &#39;survey&#39;, &#39;pranowo&#39;, &#39;ahok&#39;]
-Topik 10:  [&#39;rakyat&#39;, &#39;2024&#39;, &#39;indonesia&#39;, &#39;baswedan&#39;, &#39;pintar&#39;]
-Topik 11:  [&#39;ahok&#39;, &#39;rakyat&#39;, &#39;bravo&#39;, &#39;pintar&#39;, &#39;mantap&#39;]
-Topik 12:  [&#39;surv&#39;, &#39;bayaran&#39;, &#39;percaya&#39;, &#39;enggak&#39;, &#39;pranowo&#39;]
-Topik 13:  [&#39;ahok&#39;, &#39;2024&#39;, &#39;pranowo&#39;, &#39;surv&#39;, &#39;bayaran&#39;]
-Topik 14:  [&#39;bayaran&#39;, &#39;surv&#39;, &#39;saja&#39;, &#39;ahi&#39;, &#39;pilih&#39;]
-Topik 15:  [&#39;pranowo&#39;, &#39;ahi&#39;, &#39;terbaik&#39;, &#39;saja&#39;, &#39;baswedan&#39;]
-Topik 16:  [&#39;ya&#39;, &#39;menang&#39;, &#39;semoga&#39;, &#39;capr&#39;, &#39;nya&#39;]
-Topik 17:  [&#39;ya&#39;, &#39;best&#39;, &#39;semoga&#39;, &#39;baswedan&#39;, &#39;saja&#39;]
-Topik 18:  [&#39;ri&#39;, &#39;ya&#39;, &#39;orang&#39;, &#39;pakai&#39;, &#39;presid&#39;]
-Topik 19:  [&#39;pranowo&#39;, &#39;best&#39;, &#39;the&#39;, &#39;indonesia&#39;, &#39;aiman&#39;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Topik 0:  [(&#39;ani&#39;, 0.5620741161394407), (&#39;yang&#39;, 0.365653163958337), (&#39;ganjar&#39;, 0.345217379214412), (&#39;prabowo&#39;, 0.23527219744288727), (&#39;pilih&#39;, 0.1762541698687319)]
+Topik 1:  [(&#39;ganjar&#39;, 0.6526056632821323), (&#39;prabowo&#39;, 0.3606123782430174), (&#39;pranowo&#39;, 0.2382520088506353), (&#39;ahok&#39;, 0.11067073856268696), (&#39;ri&#39;, 0.08696309854706263)]
+Topik 2:  [(&#39;abal&#39;, 0.6097953705167579), (&#39;survei&#39;, 0.4787486008256979), (&#39;survey&#39;, 0.2017119297937957), (&#39;percaya&#39;, 0.17645075747909994), (&#39;bayaran&#39;, 0.17142039451099658)]
+Topik 3:  [(&#39;prabowo&#39;, 0.793607765042044), (&#39;ahok&#39;, 0.08972848168187855), (&#39;pilih&#39;, 0.0874248356435931), (&#39;kamil&#39;, 0.08607699472844858), (&#39;2024&#39;, 0.08592306292037179)]
 </pre></div>
 </div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h5>Bobot Setiap Topik Terhadap Dokumen<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h5>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_lsa_yt</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">lsa_fit_yt</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Topik 0&quot;</span><span class="p">,</span> <span class="s2">&quot;Topik 1&quot;</span><span class="p">,</span> <span class="s2">&quot;Topik 2&quot;</span><span class="p">,</span> <span class="s2">&quot;Topik 3&quot;</span><span class="p">])</span>
+<span class="n">df_lsa_yt</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_yt</span><span class="p">[</span><span class="s2">&quot;Youtube&quot;</span><span class="p">],</span> <span class="n">df_lsa_yt</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_lsa_yt</span><span class="p">[</span><span class="s1">&#39;Topik&#39;</span><span class="p">]</span><span class="o">=</span> <span class="n">df_lsa_yt</span><span class="p">[[</span><span class="s1">&#39;Topik 0&#39;</span><span class="p">,</span> <span class="s1">&#39;Topik 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Topik 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Topik 3&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">argmax</span><span class="p">(),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">df_lsa_yt</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-72509d2d-bc90-4696-9b2f-c286ed47b6c9">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Youtube</th>
+      <th>Topik 0</th>
+      <th>Topik 1</th>
+      <th>Topik 2</th>
+      <th>Topik 3</th>
+      <th>Topik</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>bravo prabowo ganjar ahok</td>
+      <td>0.287661</td>
+      <td>0.426260</td>
+      <td>-0.004126</td>
+      <td>0.217500</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>yang kwn kwn wni yang negeri sependapat memili...</td>
+      <td>0.259198</td>
+      <td>-0.049888</td>
+      <td>-0.076117</td>
+      <td>-0.091467</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>aceh sesumatra prabowo ri 1</td>
+      <td>0.099326</td>
+      <td>0.162239</td>
+      <td>-0.026449</td>
+      <td>0.299755</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>enggak memilih uru sgala macam repot enggak ya...</td>
+      <td>0.114552</td>
+      <td>-0.015027</td>
+      <td>0.051152</td>
+      <td>-0.004404</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ahi ani sama rk saja</td>
+      <td>0.207540</td>
+      <td>-0.133259</td>
+      <td>-0.124599</td>
+      <td>-0.042123</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>482</th>
+      <td>heran hasil survei ganjar enggak prestasi ungg...</td>
+      <td>0.239429</td>
+      <td>-0.007509</td>
+      <td>0.080609</td>
+      <td>-0.067393</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>483</th>
+      <td>isi bensin pakai my pertamina auto enggak nyob...</td>
+      <td>0.041909</td>
+      <td>0.013942</td>
+      <td>0.022137</td>
+      <td>0.000306</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>484</th>
+      <td>lihat prabowo ani pa ideal</td>
+      <td>0.243707</td>
+      <td>0.007243</td>
+      <td>-0.104611</td>
+      <td>0.268162</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>485</th>
+      <td>hati-hati survei abal2bro</td>
+      <td>0.063272</td>
+      <td>-0.064083</td>
+      <td>0.189847</td>
+      <td>0.030269</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>486</th>
+      <td>0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>487 rows × 6 columns</p>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-72509d2d-bc90-4696-9b2f-c286ed47b6c9')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+        
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+      
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-72509d2d-bc90-4696-9b2f-c286ed47b6c9 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-72509d2d-bc90-4696-9b2f-c286ed47b6c9');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+  </div></div>
 </div>
 </div>
 </div>
@@ -4193,8 +4755,16 @@ Topik 19:  [&#39;pranowo&#39;, &#39;best&#39;, &#39;the&#39;, &#39;indonesia&#39
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-dataset-youtube-dan-twitter-yang-telah-melalui-prepocessing">Load Dataset Youtube dan Twitter yang telah Melalui Prepocessing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-mengubah-teks-menjadi-fitur">TF-IDF (Mengubah Teks Menjadi Fitur)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#singular-value-decomposition">Singular Value Decomposition</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-svd-untuk-data-twitter">Perform SVD Untuk Data Twitter</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-svd-untuk-data-youtube">Perform SVD Untuk Data Youtube</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-svd-untuk-data-twitter">Perform SVD Untuk Data Twitter</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#bobot-kata-terhadap-masing-masing-topik">Bobot Kata Terhadap Masing - Masing Topik</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#bobot-setiap-topik-terhadap-dokumen">Bobot Setiap Topik Terhadap Dokumen</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-svd-untuk-data-youtube">Perform SVD Untuk Data Youtube</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Bobot Kata Terhadap Masing - Masing Topik</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Bobot Setiap Topik Terhadap Dokumen</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
